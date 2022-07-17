@@ -29,7 +29,8 @@ createMarkupGallery();
 
 function onShowBigImage(evt) {
   evt.preventDefault();
-  if (!evt.target.classList.contains("gallery__image")) {
+
+  if (evt.target.nodeName !== "IMG") {
     return;
   }
 
@@ -41,13 +42,13 @@ function onShowBigImage(evt) {
   modal.show();
 
   if (modal.visible()) {
-    window.addEventListener("keydown", onPressKeyESC);
+    galleryRef.addEventListener("keydown", onPressKeyESC);
   }
 
   function onPressKeyESC(evt) {
     if (evt.code === "Escape") {
       modal.close();
-      window.removeEventListener("keydown", onPressKeyESC);
+      galleryRef.removeEventListener("keydown", onPressKeyESC);
     }
   }
 }
